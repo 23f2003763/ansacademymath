@@ -1,30 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+  },
   experimental: {
-    appDir: true,
+    // Remove 'appDir' - it's deprecated in Next.js 14
+    serverComponentsExternalPackages: ['@prisma/client']
   },
   images: {
-    domains: ['your-domain.com'],
+    domains: ['localhost', 'railway.app', 'up.railway.app'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: '*.up.railway.app',
       },
     ],
-  },
-  env: {
-    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
-  },
-  // Optimize bundle
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  // Enable compression
-  compress: true,
-  // Optimize fonts
-  optimizeFonts: true,
-  // Enable SWC minification
-  swcMinify: true,
+  }
 }
 
 module.exports = nextConfig
