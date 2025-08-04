@@ -1,7 +1,9 @@
 /// <reference types="jest" />
 import { verifyToken, generateToken } from '@/lib/auth'
 import { NextRequest } from 'next/server'
+import { expect } from '@jest/globals'
 
+// @ts-ignore
 // Mock Prisma
 jest.mock('@/lib/db', () => ({
   prisma: {
