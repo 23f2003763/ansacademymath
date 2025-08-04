@@ -1,0 +1,25 @@
+[build]
+builder = "dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "always"
+
+[[services]]
+name = "web"
+source = "."
+
+[services.web]
+tcpProxies = [
+  { fromPort = 3000, toPort = 3000 },
+  { fromPort = 3001, toPort = 3001 }
+]
+
+[[services]]
+name = "database"
+source = "postgresql"
+
+[[services]]
+name = "ollama"
+source = "ollama/llama3:8b"
