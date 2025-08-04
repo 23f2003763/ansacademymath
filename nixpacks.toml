@@ -1,0 +1,9 @@
+# nixpacks.toml
+[build]
+cmd = "npm ci && npx prisma generate && npm run build"
+
+[start]
+cmd = "npx prisma migrate deploy && npm start"
+
+[variables]
+NODE_ENV = "production"
